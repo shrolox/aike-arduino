@@ -11,15 +11,17 @@ Bike::Bike(int frontSpeedSensorPin, int pedalSpeedSensorPin, int frontLightPin, 
 }
 
 void Bike::setup() {
-    this->frontSpeedSensor->setup();
-    this->pedalSpeedSensor->setup();
     this->frontLight->setup();
     this->backLight->setup();
+    this->frontSpeedSensor->setup();
+    this->pedalSpeedSensor->setup();
 }
 
 void Bike::loop() {
     this->frontLight->loop();
     this->backLight->loop();
+    this->frontSpeedSensor->loop();
+    this->pedalSpeedSensor->loop();
 }
 
 Bike::BikeStatus Bike::getStatus() {

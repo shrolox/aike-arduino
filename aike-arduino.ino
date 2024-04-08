@@ -21,12 +21,12 @@ Button caseButton = Button(INPUT_CASE_BUTTON);
 
 
 void setup() {
+  // Start the serial communication
+  Serial.begin(9600);
+
   // initialize bike (lights and sensors)
   bike.setup();
   caseButton.setup();
-
-  // Start the serial communication
-  Serial.begin(9600);
 }
 
 void loop() {
@@ -34,5 +34,14 @@ void loop() {
     bike.updateLightsMode();
   }
 
+  if (caseButton.gotLongPress()) {
+    Serial.println("Long press");
+  }
+
+  if (caseButton.gotQuickPress()) {
+    Serial.println("Quick press");
+  }
+
   bike.loop();
+  caseButton.loop();
 }

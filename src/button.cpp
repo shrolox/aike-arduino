@@ -10,22 +10,31 @@ void Button::setup() {
     pinMode(this->pin, INPUT_PULLUP);
 }
 
-bool Button::gotQuickPress() {
-    // Read the state of the button
-    static int buttonState = LOW;
-    int newButtonState = digitalRead(INPUT_CASE_BUTTON);
-  
-    // If button state has changed and the button is pressed, change the light mode
-    if (newButtonState == HIGH && buttonState != newButtonState) {
-        Serial.println("Button pressed");
-        buttonState = newButtonState;
-        return true;
-    } else {
-        buttonState = newButtonState;
-        return false;
+void Button::loop() {
+    this->lastState = this->currentState;
+    this->currentState = !digitalRead(this->pin);
+
+    if (this->currentState == HIGH && this->lastState == LOW) {
+        this->pressStart = millis();
     }
 }
 
-bool Button::gotLongPress() {
+bool Button::gotQuickPress() {
+    if (this->currentState == LOW) {
+        unsigned long pressDuration = millis() - this->pressStart;
+        if (pressDuration < 400 && pressDuration > 50) {
+            return true;
+        }
+    }
+    return false;
+}
 
+bool Button::gotLongPress() {
+    if (this->currentState == LOW) {
+        unsigned long pressDuration = millis() - pressStart;
+        if (pressDuration >= 400) {
+            return true;
+        }
+    }
+    return false;
 }

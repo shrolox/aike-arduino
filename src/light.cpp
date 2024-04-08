@@ -9,6 +9,7 @@ Light::Light(int pin) {
 }
 
 void Light::setup() {
+    Serial.println("Setting up light");
     pinMode(this->pin, OUTPUT);
 }
 

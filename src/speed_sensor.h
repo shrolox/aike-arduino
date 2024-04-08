@@ -6,10 +6,18 @@ class SpeedSensor {
     SpeedSensor(int pin);
     
     void setup();
-    bool isActivated();
+    void loop();
+    float getTurnsPerSecond();
 
   private:
     int pin;
+    float currentTurnsPerSecond;
+    unsigned long lastTurn;
+    int lastState;
+    unsigned long deactivationStart;
+
+    bool isActivated();
+    bool isNewLoop();
 };
 
 class PedalSpeedSensor : public SpeedSensor {
