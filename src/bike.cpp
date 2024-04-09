@@ -50,5 +50,5 @@ float Bike::getWheelTurnsPerSecond() {
 }
 
 float Bike::getBikeKmPerHour() {
-    return 0;
+    return this->frontSpeedSensor->getTurnsPerSecond() * WHEEL_CIRCUMFERENCE * 3.6;
 }

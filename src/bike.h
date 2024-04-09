@@ -5,6 +5,8 @@
 #ifndef BIKE_H
 #define BIKE_H
 
+#define WHEEL_CIRCUMFERENCE 2.07
+
 class Bike {
   public:
     Bike(int frontSpeedSensorPin, int pedalSpeedSensorPin, int frontLightPin, int backLightPin);

@@ -10,6 +10,7 @@
 #include "config.h"
 #include "src/bike.h"
 #include "src/button.h"
+#include "src/bluetooth_manager.h"
 
 Bike bike = Bike(
   INPUT_FRONT_SPEED_SENSOR,
@@ -18,6 +19,7 @@ Bike bike = Bike(
   OUTPUT_BACK_LIGHT
 );
 Button caseButton = Button(INPUT_CASE_BUTTON);
+BluetoothManager bluetoothManager = BluetoothManager();
 
 
 void setup() {
@@ -27,6 +29,7 @@ void setup() {
   // initialize bike (lights and sensors)
   bike.setup();
   caseButton.setup();
+  bluetoothManager.setup();
 }
 
 void loop() {
@@ -36,4 +39,9 @@ void loop() {
 
   bike.loop();
   caseButton.loop();
+  Bike::BikeStatus status = bike.getStatus();
+  
+  Serial.println(status.speed);
+
+  bluetoothManager.loop(status);
 }
