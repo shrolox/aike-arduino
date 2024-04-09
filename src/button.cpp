@@ -20,7 +20,7 @@ void Button::loop() {
 }
 
 bool Button::gotQuickPress() {
-    if (this->currentState == LOW) {
+    if (this->currentState == LOW && this->lastState == HIGH) {
         unsigned long pressDuration = millis() - this->pressStart;
         if (pressDuration < 400 && pressDuration > 50) {
             return true;
@@ -30,7 +30,7 @@ bool Button::gotQuickPress() {
 }
 
 bool Button::gotLongPress() {
-    if (this->currentState == LOW) {
+    if (this->currentState == LOW && this->lastState == HIGH) {
         unsigned long pressDuration = millis() - pressStart;
         if (pressDuration >= 400) {
             return true;

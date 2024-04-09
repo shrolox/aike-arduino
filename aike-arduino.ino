@@ -34,14 +34,6 @@ void loop() {
     bike.updateLightsMode();
   }
 
-  if (caseButton.gotLongPress()) {
-    Serial.println("Long press");
-  }
-
-  if (caseButton.gotQuickPress()) {
-    Serial.println("Quick press");
-  }
-
   bike.loop();
   caseButton.loop();
 }

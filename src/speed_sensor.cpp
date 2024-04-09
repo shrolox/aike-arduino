@@ -7,8 +7,6 @@ SpeedSensor::SpeedSensor(int pin) {
 }
 
 void SpeedSensor::setup() {
-  Serial.print("Setting up speed sensor on pin ");
-  Serial.println(this->pin);
   pinMode(this->pin, INPUT_PULLUP);
 }
 
